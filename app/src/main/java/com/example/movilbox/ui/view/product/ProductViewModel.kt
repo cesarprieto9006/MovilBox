@@ -1,4 +1,4 @@
-package com.example.movilbox.ui.view.viewmodel
+package com.example.movilbox.ui.view.product
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

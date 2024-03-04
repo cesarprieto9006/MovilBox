@@ -19,6 +19,9 @@ interface ProductDao {
         "SELECT * FROM product_table WHERE title LIKE  '%' || :title || '%' ORDER BY rating DESC")
     suspend fun getProductName(title: String): List<ProductEntity>
 
+    @Query("SELECT * FROM product_table WHERE id = :idProduct")
+    suspend fun getProductId(idProduct:String): ProductEntity
+
     @Query("DELETE FROM product_table")
     suspend fun deleteProducts()
 }

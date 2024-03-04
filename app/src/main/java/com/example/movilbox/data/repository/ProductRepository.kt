@@ -57,4 +57,9 @@ class ProductRepository @Inject constructor(
         val response: List<ProductEntity> = productDao.getAllProduct()
         return response.map { it.toDomainModel() }
     }
+
+    suspend fun getProductId(id:String): ProductList {
+        val response: ProductEntity = productDao.getProductId(id)
+        return response.toDomainModel()
+    }
 }

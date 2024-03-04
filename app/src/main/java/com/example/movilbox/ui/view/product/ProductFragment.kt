@@ -1,16 +1,18 @@
-package com.example.movilbox.ui.view.category
+package com.example.movilbox.ui.view.product
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
+import com.example.movilbox.R
 import com.example.movilbox.databinding.FragmentProductBinding
 import com.example.movilbox.domain.model.ProductList
-import com.example.movilbox.ui.view.adapter.ProductAdapter
-import com.example.movilbox.ui.view.viewmodel.ProductViewModel
+import com.example.movilbox.ui.view.product.adapter.ProductAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -56,9 +58,9 @@ class ProductFragment : Fragment() {
         }
     }
 
-    private fun onItemClickAdd(movement: ProductList) {
-        //val bundle = bundleOf("productId" to movement.id)
-        //view?.findNavController()?.navigate(R.id.action_mainFragment_to_detailProductFragment, bundle)
+    private fun onItemClickAdd(product: ProductList) {
+        val bundle = bundleOf("id" to product.id)
+        view?.findNavController()?.navigate(R.id.action_categoryFragment_to_detailProductFragment, bundle)
     }
 
     private fun configureSearch() {

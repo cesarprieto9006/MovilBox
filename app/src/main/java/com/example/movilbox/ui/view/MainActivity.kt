@@ -8,7 +8,8 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.movilbox.R
 import com.example.movilbox.databinding.ActivityMainBinding
-import com.example.movilbox.ui.view.category.ProductFragment
+import com.example.movilbox.ui.view.detail.DetailProductFragment
+import com.example.movilbox.ui.view.product.ProductFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
@@ -62,7 +63,7 @@ class MainActivity : AppCompatActivity() {
         object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 when (navHost.childFragmentManager.primaryNavigationFragment) {
-                    is ProductFragment -> {
+                    is DetailProductFragment -> {
                         navController.navigateUp()
                     }
                 }

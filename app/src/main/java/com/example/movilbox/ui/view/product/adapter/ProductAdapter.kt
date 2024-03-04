@@ -1,4 +1,4 @@
-package com.example.movilbox.ui.view.adapter
+package com.example.movilbox.ui.view.product.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater

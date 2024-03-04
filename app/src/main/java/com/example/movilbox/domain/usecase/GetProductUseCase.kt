@@ -19,4 +19,7 @@ class GetProductUseCase @Inject constructor(private val repository: ProductRepos
 
     suspend fun getProductName(name: String): List<ProductList> =
         repository.getProductName(name)
+
+    suspend fun getProductId(id: String): ProductList =
+        repository.getProductId(id)
 }
