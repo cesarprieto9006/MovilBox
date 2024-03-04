@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.movilbox.databinding.FragmentProductBinding
@@ -11,7 +12,6 @@ import com.example.movilbox.domain.model.ProductList
 import com.example.movilbox.ui.view.adapter.ProductAdapter
 import com.example.movilbox.ui.view.viewmodel.ProductViewModel
 import dagger.hilt.android.AndroidEntryPoint
-
 
 @AndroidEntryPoint
 class ProductFragment : Fragment() {
@@ -30,6 +30,7 @@ class ProductFragment : Fragment() {
         _binding = FragmentProductBinding.inflate(inflater, container, false)
 
         configureBinding()
+        configureSearch()
         configureListProduct()
 
         return binding.root
@@ -47,7 +48,6 @@ class ProductFragment : Fragment() {
     }
 
     private fun configureListProduct() {
-
         viewModel.product.observe(viewLifecycleOwner) { movements ->
             if (movements != null) {
                 adapter = ProductAdapter(movements, ::onItemClickAdd)
@@ -59,5 +59,11 @@ class ProductFragment : Fragment() {
     private fun onItemClickAdd(movement: ProductList) {
         //val bundle = bundleOf("productId" to movement.id)
         //view?.findNavController()?.navigate(R.id.action_mainFragment_to_detailProductFragment, bundle)
+    }
+
+    private fun configureSearch() {
+        binding.etSearchProduct.doAfterTextChanged {
+            viewModel.searchProduct(it.toString())
+        }
     }
 }
