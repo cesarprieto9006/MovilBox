@@ -9,11 +9,11 @@
 
         <variable
             name="viewModel"
-            type="com.example.movilbox.ui.view.viewmodel.ProductViewModel" />
+            type="com.example.movilbox.ui.view.product.ProductViewModel" />
 
         <variable
             name="adapter"
-            type="com.example.movilbox.ui.view.adapter.ProductAdapter" />
+            type="com.example.movilbox.ui.view.product.adapter.ProductAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
