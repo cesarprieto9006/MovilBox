@@ -19,7 +19,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/green_11">
+        android:background="@color/white">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/clScreen"
@@ -30,30 +30,29 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
-
-            <SearchView
+            <EditText
                 android:id="@+id/etSearchProduct"
                 android:layout_width="@dimen/margin_0dp"
                 android:layout_height="match_parent"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginStart="@dimen/margin_15dp"
+                android:layout_marginTop="@dimen/margin_15dp"
                 android:layout_marginEnd="10dp"
-                android:layout_marginBottom="15dp"
-                android:autofillHints=""
+                android:layout_marginBottom="@dimen/margin_15dp"
                 android:background="@drawable/rounded"
                 android:fontFamily="@font/roboto_black"
-                android:iconifiedByDefault="false"
                 android:inputType="text"
+                android:hint="@string/text_hint"
                 android:minHeight="@dimen/margin_48dp"
                 android:paddingLeft="@dimen/margin_10dp"
                 android:paddingRight="@dimen/margin_10dp"
-                android:queryHint="@string/text_hint"
                 android:singleLine="true"
-                android:textSize="8sp"
+                android:drawableStart="@drawable/ic_search"
+                android:textSize="@dimen/size_18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/imageView2"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="Autofill" />
 
             <ImageView
                 android:id="@+id/imageView2"
@@ -63,7 +62,8 @@
                 android:background="@drawable/ic_filter"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -80,6 +80,31 @@
             app:layout_constraintTop_toTopOf="parent"
             app:spanCount="2"
             tools:listitem="@layout/item_product" />
+
+        <ImageView
+
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_not_product"
+            android:visibility="@{viewModel.notProductVisibility ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toTopOf="@+id/clScreen"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="gone"
+            tools:ignore="ContentDescription" />
+
+        <ProgressBar
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="@dimen/margin_100dp"
+            android:layout_height="@dimen/margin_100dp"
+            android:progressDrawable="@drawable/circular_progess_bar"
+            android:visibility="@{viewModel.showLoader ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toTopOf="@+id/clScreen"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

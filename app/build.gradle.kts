@@ -64,5 +64,8 @@ dependencies {
     implementation ("com.squareup.okhttp3:logging-interceptor:4.9.3")
     implementation("com.jakewharton.timber:timber:5.0.1")
     implementation("io.coil-kt:coil:2.5.0")
+    implementation ("androidx.room:room-ktx:2.6.1")
+    kapt ("androidx.room:room-compiler:2.6.1")
+    implementation ("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
 
 }

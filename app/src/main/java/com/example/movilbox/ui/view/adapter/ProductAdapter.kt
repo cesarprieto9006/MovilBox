@@ -3,6 +3,7 @@ package com.example.movilbox.ui.view.adapter
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.CircleCropTransformation
@@ -31,11 +32,11 @@ class ProductAdapter(
 
     override fun getItemCount() = products.size
 
+    @SuppressLint("SetTextI18n")
     inner class ProductViewHolder(private val item: ItemProductBinding) :
         RecyclerView.ViewHolder(item.root) {
 
         private val format = DecimalFormat("#,###")
-        @SuppressLint("SetTextI18n")
         fun bind(product: ProductList) {
 
             val valueFormat: String = format.format(product.price)
@@ -43,6 +44,7 @@ class ProductAdapter(
             item.lblPriceProduct.text = "$ $valueFormat"
             item.lblTitleProduct.text = product.title
             item.lblRatingProduct.text = product.rating.toString()
+            item.lblStateProduct.isVisible = product.stock == 0
             item.imgItemProduct.load(product.thumbnail) {
                 crossfade(true)
                 transformations(CircleCropTransformation())

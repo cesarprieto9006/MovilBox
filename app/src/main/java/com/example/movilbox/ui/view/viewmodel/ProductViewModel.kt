@@ -22,6 +22,12 @@ class ProductViewModel @Inject constructor(
     private val _product = MutableLiveData<List<ProductList>?>()
     val product: LiveData<List<ProductList>?> get() = _product
 
+    private val _notProductVisibility = MutableLiveData(false)
+    val notProductVisibility: LiveData<Boolean?> get() = _notProductVisibility
+
+    private val _showLoader = MutableLiveData(true)
+    val showLoader: LiveData<Boolean?> get() = _showLoader
+
     fun getCategories() {
         viewModelScope.launch(ioDispatcher) {
             when (val result = getCategoryUseCase.invoke()) {
@@ -41,19 +47,23 @@ class ProductViewModel @Inject constructor(
     fun getProduct() {
         viewModelScope.launch(ioDispatcher) {
             when (val result = getCategoryUseCase.invoke()) {
-                is Either.Left -> {
-                    val a = ""
-                }
-
-                is Either.Right -> {
-                    val product = result.value
-                    _product.postValue(product.products)
-                }
+                is Either.Left -> showProduct()
+                is Either.Right -> showProduct()
             }
-
+            _showLoader.postValue(false)
         }
     }
 
+    private suspend fun showProduct() {
+        _product.postValue(getCategoryUseCase.getAllProduct())
+    }
 
+    fun searchProduct(name: String) {
+        viewModelScope.launch(ioDispatcher) {
+            val response = getCategoryUseCase.getProductName(name)
+            _product.postValue(getCategoryUseCase.getProductName(name))
+            _notProductVisibility.postValue(response.isEmpty())
+        }
+    }
 
 }
