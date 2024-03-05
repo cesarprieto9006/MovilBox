@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_10dp"
+        android:clickable="true"
+        app:cardCornerRadius="@dimen/margin_15dp"
+        app:cardElevation="@dimen/margin_7dp"
+        android:focusable="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/lyItemProduct"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:padding="@dimen/margin_10dp">
+
+            <ImageView
+                android:id="@+id/imgItemProduct"
+                android:layout_width="@dimen/margin_130dp"
+                android:layout_height="@dimen/margin_130dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/lblTitleProduct"
+                android:layout_width="@dimen/margin_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/roboto_bold"
+                android:gravity="center"
+                android:maxLines="2"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imgItemProduct"
+                tools:text="Carro" />
+
+            <TextView
+                android:id="@+id/lblPriceProduct"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/roboto_black"
+                android:textSize="17sp"
+                app:layout_constraintEnd_toEndOf="@+id/lblTitleProduct"
+                app:layout_constraintStart_toStartOf="@id/lblTitleProduct"
+                app:layout_constraintTop_toBottomOf="@+id/lblTitleProduct"
+                tools:text="$ 0000" />
+
+            <TextView
+                android:id="@+id/lblRatingProduct"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_bold"
+                android:textColor="@color/purple_500"
+                android:textSize="@dimen/size_15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="5.0" />
+
+            <TextView
+                android:id="@+id/lblStateProduct"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_black"
+                android:text="@string/not_product"
+                android:textColor="@color/red"
+                android:textSize="17sp"
+                app:layout_constraintEnd_toEndOf="@+id/lblTitleProduct"
+                app:layout_constraintStart_toStartOf="@id/lblTitleProduct"
+                app:layout_constraintTop_toBottomOf="@+id/lblRatingProduct" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

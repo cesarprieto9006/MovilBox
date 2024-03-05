@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">MovilBox</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_hint">Buscar producto</string>
+    <string name="not_product">No disponoble</string>
+    <string name="cost">Precio: $%s </string>
+    <string name="discount">Descuento: %s</string>
+    <string name="quantity">Cantidad: %s</string>
+    <string name="category">Categoria: %s</string>
+
 </resources>
