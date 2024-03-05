@@ -10,7 +10,6 @@ import com.example.movilbox.R
 import com.example.movilbox.databinding.FragmentDetailProductBinding
 import com.example.movilbox.ui.view.detail.adapter.ImageSlideAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.DecimalFormat
 
 @AndroidEntryPoint
 class DetailProductFragment : Fragment() {
@@ -20,8 +19,6 @@ class DetailProductFragment : Fragment() {
     private val viewModel by viewModels<DetailProductViewModel>()
 
     private lateinit var viewPagerAdapter: ImageSlideAdapter
-
-    private val format = DecimalFormat("#,###")
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,7 +45,6 @@ class DetailProductFragment : Fragment() {
 
     private fun configureProductDetail() {
         viewModel.product.observe(viewLifecycleOwner) { productDetail ->
-            val builder = StringBuilder()
             if (productDetail != null) {
                 binding.tvTitleProduct.text = productDetail.title
                 binding.tvRatingProduct.text = productDetail.rating.toString()

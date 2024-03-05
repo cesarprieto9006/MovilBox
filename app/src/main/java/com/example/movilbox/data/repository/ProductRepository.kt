@@ -58,8 +58,92 @@ class ProductRepository @Inject constructor(
         return response.map { it.toDomainModel() }
     }
 
-    suspend fun getProductId(id:String): ProductList {
+    suspend fun getProductId(id: String): ProductList {
         val response: ProductEntity = productDao.getProductId(id)
         return response.toDomainModel()
+    }
+
+    suspend fun getPriceDesc(): List<ProductList> {
+        val response: List<ProductEntity> = productDao.getPriceDesc()
+        return response.map {
+            it.toDomainModel()
+        }
+    }
+
+    suspend fun getPriceAsc(): List<ProductList> {
+        val response: List<ProductEntity> = productDao.getPriceAsc()
+        return response.map {
+            it.toDomainModel()
+        }
+    }
+
+    suspend fun getDiscountDesc(): List<ProductList> {
+        val response: List<ProductEntity> = productDao.getDiscountDesc()
+        return response.map {
+            it.toDomainModel()
+        }
+    }
+
+    suspend fun getDiscountAsc(): List<ProductList> {
+        val response: List<ProductEntity> = productDao.getDiscountAsc()
+        return response.map {
+            it.toDomainModel()
+        }
+    }
+
+    suspend fun getCategoryDesc(): List<ProductList> {
+        val response: List<ProductEntity> = productDao.getCategoryDesc()
+        return response.map {
+            it.toDomainModel()
+        }
+    }
+
+    suspend fun getCategoryAsc(): List<ProductList> {
+        val response: List<ProductEntity> = productDao.getCategoryAsc()
+        return response.map {
+            it.toDomainModel()
+        }
+    }
+
+    suspend fun getRatingDesc(): List<ProductList> {
+        val response: List<ProductEntity> = productDao.getRatingDesc()
+        return response.map {
+            it.toDomainModel()
+        }
+    }
+
+    suspend fun getRatingAsc(): List<ProductList> {
+        val response: List<ProductEntity> = productDao.getRatingAsc()
+        return response.map {
+            it.toDomainModel()
+        }
+    }
+
+    suspend fun getStockDesc(): List<ProductList> {
+        val response: List<ProductEntity> = productDao.getStockDesc()
+        return response.map {
+            it.toDomainModel()
+        }
+    }
+
+    suspend fun getStockAsc(): List<ProductList> {
+        val response: List<ProductEntity> = productDao.getStockAsc()
+        return response.map {
+            it.toDomainModel()
+        }
+    }
+
+    suspend fun getBrandAsc(): List<ProductList> {
+        val response: List<ProductEntity> = productDao.getBrandAsc()
+        return response.map {
+            it.toDomainModel()
+        }
+    }
+
+    suspend fun getBrandDesc(): List<ProductList> {
+        val response: List<ProductEntity> = productDao.getBrandDesc()
+        return response.map {
+            it.toDomainModel()
+        }
     }
 }
