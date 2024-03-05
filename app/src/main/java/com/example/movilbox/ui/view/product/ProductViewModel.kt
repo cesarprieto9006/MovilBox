@@ -28,27 +28,30 @@ class ProductViewModel @Inject constructor(
     private val _showLoader = MutableLiveData(true)
     val showLoader: LiveData<Boolean?> get() = _showLoader
 
+    private val _showFilter = MutableLiveData(false)
+    val showFilter: LiveData<Boolean?> get() = _showFilter
+
     fun getCategories() {
         viewModelScope.launch(ioDispatcher) {
-            when (val result = getCategoryUseCase.invoke()) {
+            when (getCategoryUseCase.invoke()) {
                 is Either.Left -> {
-                    val a = ""
+                    showProduct()
+                    _showLoader.postValue(false)
                 }
 
-                is Either.Right -> {
-                    val product = result.value
-
-                }
+                is Either.Right -> getProduct()
             }
-
         }
     }
 
-    fun getProduct() {
+    private fun getProduct() {
         viewModelScope.launch(ioDispatcher) {
-            when (val result = getCategoryUseCase.invoke()) {
-                is Either.Left -> showProduct()
-                is Either.Right -> showProduct()
+            when (getCategoryUseCase.invoke()) {
+                is Either.Left ->
+                    showProduct()
+
+                is Either.Right ->
+                    showProduct()
             }
             _showLoader.postValue(false)
         }
@@ -64,6 +67,29 @@ class ProductViewModel @Inject constructor(
             _product.postValue(getCategoryUseCase.getProductName(name))
             _notProductVisibility.postValue(response.isEmpty())
         }
+    }
+
+    fun getProductFilter(item: String, type: String) {
+        viewModelScope.launch(ioDispatcher) {
+            when {
+                item == "Precio" && type == "Asc" -> _product.postValue(getCategoryUseCase.getPriceAsc())
+                item == "Precio" && type == "Desc" -> _product.postValue(getCategoryUseCase.getPriceDesc())
+                item == "Descuento" && type == "Asc" -> _product.postValue(getCategoryUseCase.getDiscountAsc())
+                item == "Descuento" && type == "Desc" -> _product.postValue(getCategoryUseCase.getDiscountDesc())
+                item == "Categoria" && type == "Asc" -> _product.postValue(getCategoryUseCase.getCategoryAsc())
+                item == "Categoria" && type == "Desc" -> _product.postValue(getCategoryUseCase.getCategoryDesc())
+                item == "Rating" && type == "Asc" -> _product.postValue(getCategoryUseCase.getRatingAsc())
+                item == "Rating" && type == "Desc" -> _product.postValue(getCategoryUseCase.getRatingDesc())
+                item == "Stock" && type == "Asc" -> _product.postValue(getCategoryUseCase.getStockAsc())
+                item == "Stock" && type == "Desc" -> _product.postValue(getCategoryUseCase.getStockDesc())
+                item == "Marca" && type == "Asc" -> _product.postValue(getCategoryUseCase.getBrandAsc())
+                item == "Marca" && type == "Desc" -> _product.postValue(getCategoryUseCase.getBrandDesc())
+            }
+        }
+    }
+
+    fun showFilter(state: Boolean) {
+        _showFilter.postValue(state)
     }
 
 }

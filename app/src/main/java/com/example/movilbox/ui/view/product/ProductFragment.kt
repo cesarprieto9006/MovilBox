@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.core.os.bundleOf
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
@@ -22,6 +23,8 @@ class ProductFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: ProductViewModel by viewModels()
     private lateinit var adapter: ProductAdapter
+    private val itemList = arrayOf("Precio", "Descuento", "Categoria", "Rating", "Stock", "Marca")
+    private val typeList = arrayOf("Asc", "Desc")
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,12 +38,40 @@ class ProductFragment : Fragment() {
         configureSearch()
         configureListProduct()
 
+        binding.imageFilterProduct.setOnClickListener() {
+            stateFilter(true)
+        }
+
+        binding.spnItem.adapter = ArrayAdapter(
+            requireActivity(),
+            android.R.layout.simple_spinner_dropdown_item,
+            itemList
+        )
+
+        binding.spnType.adapter = ArrayAdapter(
+            requireActivity(),
+            android.R.layout.simple_spinner_dropdown_item,
+            typeList
+        )
+
+        binding.btnAcept.setOnClickListener {
+            viewModel.getProductFilter(
+                binding.spnItem.selectedItem.toString(),
+                binding.spnType.selectedItem.toString()
+            )
+            stateFilter(false)
+        }
+
         return binding.root
     }
 
-    override fun onResume() {
-        super.onResume()
-        viewModel.getProduct()
+    private fun stateFilter(state:Boolean){
+        viewModel.showFilter(state)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.getCategories()
     }
 
     private fun configureBinding() {
@@ -59,13 +90,16 @@ class ProductFragment : Fragment() {
     }
 
     private fun onItemClickAdd(product: ProductList) {
+        stateFilter(false)
         val bundle = bundleOf("id" to product.id)
-        view?.findNavController()?.navigate(R.id.action_categoryFragment_to_detailProductFragment, bundle)
+        view?.findNavController()
+            ?.navigate(R.id.action_categoryFragment_to_detailProductFragment, bundle)
     }
 
     private fun configureSearch() {
         binding.etSearchProduct.doAfterTextChanged {
-            viewModel.searchProduct(it.toString())
+            if (it.toString() != "")
+                viewModel.searchProduct(it.toString())
         }
     }
 }
